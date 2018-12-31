@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { findDOMNode, unstable_renderSubtreeIntoContainer } from 'react-dom';
+import { findDOMNode, unmountComponentAtNode, unstable_renderSubtreeIntoContainer } from 'react-dom';
 import { Constants, arrayUnique } from './util';
 import { ArrowContainer } from './ArrowContainer';
 import { PopoverProps, ContentRenderer, ContentRendererArgs, Position, Align, ContentLocation } from './index';
@@ -175,6 +175,7 @@ class Popover extends React.Component<PopoverProps, {}> {
                     this.targetPositionIntervalHandler = null;
                     if (this.popoverDiv.parentNode) {
                         this.popoverDiv.parentNode.removeChild(this.popoverDiv);
+                        unmountComponentAtNode(this.popoverDiv);
                     }
                 }
             };
